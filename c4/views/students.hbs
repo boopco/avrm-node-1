@@ -1,33 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/main.css">
     <title>Document</title>
 </head>
+
 <body>
     {{> header}}
     <form method="post" action="/students">
         <label>
-            Ime:<br/>
+            Ime:<br />
             <input type="text" name="ime">
         </label>
-        <br/>
+        <br />
         <label>
-            Prezime:<br/>
+            Prezime:<br />
             <input type="text" name="prezime">
         </label>
-        <br/>
+        <br />
         <label>
-            Prosek:<br/>
+            Prosek:<br />
             <input type="number" name="prosek">
         </label>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <button type="submit">Submit</button>
     </form>
-    <hr/>
+    <hr />
     <table border="1" width="50%">
         <tr>
             <th>Ime</th>
@@ -47,4 +49,5 @@
         {{/each}}
     </table>
 </body>
+
 </html>
