@@ -1,0 +1,40 @@
+<head> 
+
+<title>Blog</title>
+<link rel="stylesheet" href="/styles/blog.css">
+</head>
+<body>
+ <form method="post" action="/blog">
+        <label>
+            Naslov:<br />
+            <input type="text" name="naslov">
+        </label>
+        <br />
+        <label>
+            Opis:<br />
+            <input type="text" name="opis">
+        </label>
+                
+        <br />
+        <br />
+        <button type="submit">Submit</button>
+    </form>
+
+    <table border="1" width="50%">
+        <tr>
+            <th>Naslov</th>
+            <th>Opis</th>
+            <th>Delete</th>
+        </tr>
+        {{#each blog}}
+        <tr>
+            <td>{{this.naslov}}</td>
+            <td>{{this.opis}}</td>
+            <td>
+                <a href="/blog/delete/{{@index}}">DELETE</a>
+            </td>
+        </tr>
+        {{/each}}
+    </table>
+
+</body>

@@ -84,6 +84,65 @@ app.get('/students/delete/:id', (req, res) => {
     });
 });
 
+app.get('/blog', (req, res) => {
+    fs.readFile('./blog.json', 'utf8', (err, data) => {
+        if(err){
+            res.status(400).send('bad request');
+            return;
+        }
+        let out = {
+            blog: JSON.parse(data)
+        };
+        res.render('blog', out);
+    });
+});
+
+
+app.post('/blog', (req, res)=>{
+    fs.readFile('./blog.json', 'utf8', (err, data)=>{
+        if(err){
+            res.status(400).send('bad request');
+            return;
+        }
+        data=JSON.parse(data);
+        data.push({
+            naslov: req.body.naslov,
+            opis: req.body.opis,
+        });
+        data=JSON.stringify(data);
+        fs.writeFile('./blog.json', data, (err)=>{
+            if(err){
+                res.status(400).send('bad request')
+                return;
+            }
+            res.redirect('/blog');
+        });
+    });
+});
+
+app.get('/blog/delete/:id', (req, res)=>{
+    fs.readFile('./blog.json', 'utf8', (err, data)=>{
+        if (err){
+            res.status(400).send('bad request');
+            return;
+        }
+        data = JSON.parse(data);
+            data= data.filter((v, i)=>{
+                if(i !=req.params.id){
+                    return v;
+                }
+            });
+            data = JSON.stringify(data);
+            fs.writeFile('./blog.json', data, (err)=>{
+                if(err){
+                    res.status(400).send('bad request');
+                    return;
+                }
+                res.redirect('/blog');
+            })
+    });
+});
+
 app.listen(8080, (err) => {
     if(err){
         console.log('Could not start server', err);
